@@ -31,8 +31,8 @@ func ValidateArguments(args []string) bool {
 		if isFlag(args[0]) && isFlag(args[1]) {
 			return true
 		}
-	case 4, 5, 6:
-		// Four to six args, the initial args must all be flags
+	case 4, 5:
+		// Four or five args, the initial args must all be flags
 		for i := 0; i < numArgs-3; i++ {
 			if !isFlag(args[i]) {
 				return false
