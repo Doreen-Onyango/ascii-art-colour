@@ -11,14 +11,14 @@ import (
 func main() {
 	// check enough command line arguments
 	if len(os.Args[1:]) < 1 || len(os.Args[1:]) > 6 || !utils.ValidateArguments(os.Args[1:]) {
-		fmt.Printf("Usage: go run . [OPTION] [STRING] [BANNER]\n\n")
-		fmt.Println("Example: go run . --align=right something standard")
+		fmt.Printf("Usage: go run . [OPTION] [STRING]\n\n")
+		fmt.Println("EX: go run . --color=<color> <substring to be colored> something")
 		return
 	}
 	inputslice := utils.ParseFlags()
 	if len(inputslice) == 0 {
-		fmt.Printf("Usage: go run . [OPTION] [STRING] [BANNER]\n\n")
-		fmt.Println("Example: go run . --align=right something standard")
+		fmt.Printf("Usage: go run . [OPTION] [STRING]\n\n")
+		fmt.Println("EX: go run . --color=<color> <substring to be colored> something")
 		return
 	}
 	color := *utils.ColorPtr
