@@ -10,7 +10,6 @@ import (
 // Define the flags
 var (
 	ColorPtr  = flag.String("color", "", "coloring the output")
-	AlignPtr  = flag.String("align", "", "set the alignment")
 	OutputPtr = flag.String("output", "", "set the output file")
 )
 
@@ -33,8 +32,8 @@ func ValidateFlagFormat() {
 	})
 
 	if !valid {
-		fmt.Printf("Usage: go run . [OPTION] [STRING] [BANNER]\n\n")
-		fmt.Println("Example: go run . --align=right something standard")
+		fmt.Printf("Usage: go run . [OPTION] [STRING]\n\n")
+		fmt.Println("EX: go run . --color=<color> <substring to be colored> something")
 		os.Exit(0)
 	}
 }
