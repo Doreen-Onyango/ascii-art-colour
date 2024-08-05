@@ -10,14 +10,15 @@ import (
 
 func main() {
 	// check enough command line arguments
-	// usage := "Usage: go run . [OPTION] [STRING]\n\nEX: go run . --color=<color> <substring to be colored> something"
+	usage := "Usage: go run . [OPTION] [STRING]\n\nEX: go run . --color=<color> <substring to be colored> something"
 	if len(os.Args[1:]) < 1 || len(os.Args[1:]) > 6 || !utils.ValidateArguments(os.Args[1:]) {
-		fmt.Println(utils.Usage)
+		fmt.Println(usage)
 		return
 	}
 	inputslice := utils.ParseFlags()
 	if len(inputslice) == 0 {
-		return fmt.Println(utils.Usage)
+		fmt.Println(usage)
+		return
 	}
 	color := *utils.ColorPtr
 	output := *utils.OutputPtr
@@ -46,7 +47,7 @@ func main() {
 	if output != "" {
 		err := utils.CreateTextFile(output, asciiArt)
 		if err != nil {
-			fmt.Println(utils.Usage)
+			fmt.Println(usage)
 			return
 		}
 	}
