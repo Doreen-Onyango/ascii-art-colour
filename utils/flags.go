@@ -32,8 +32,8 @@ func ValidateFlagFormat() {
 	})
 
 	if !valid {
-		fmt.Printf("Usage: go run . [OPTION] [STRING]\n\n")
-		fmt.Println("EX: go run . --color=<color> <substring to be colored> something")
+		usage := "Usage: go run . [OPTION] [STRING]\n\nEX: go run . --color=<color> <substring to be colored> something"
+		fmt.Println(usage)
 		os.Exit(0)
 	}
 }

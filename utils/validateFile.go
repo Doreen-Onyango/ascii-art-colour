@@ -26,8 +26,5 @@ func ValidateFileSize(filename string) bool {
 	}
 
 	// Check if the file size is in the list of valid sizes
-	if validSizes[fileInfo.Size()] {
-		return true
-	}
-	return false
+	return validSizes[fileInfo.Size()]
 }
