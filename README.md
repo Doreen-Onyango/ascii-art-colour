@@ -1,5 +1,5 @@
 # Ascii-Art-Color
-This project enables you to colorize the output to give a distiction of the words or characters as specified. It allows you to specify the banner file which you want your output to take its representation. It also allows you to cour some specified substring in your string.
+This project enables you to colorize the output to give a distiction of the words or characters as specified. It allows you to specify the banner file which you want your output to take its representation. It also allows you to color some specified substring in your string.
 
 
 ## Features
@@ -7,8 +7,8 @@ Some of the key features here are as follows:
 
 - Convert strings into Ascii Art with different representations.
 - Supports numbers, letters, spaces and newline characters ('\n').
-- Some special characters handled with messages.
-- 
+- Some special characters are handled with messages.
+
 
 ## Installation
 This project is purely written in Go languange, ensure you have Go installed in your computer.
@@ -27,7 +27,7 @@ cd ascii-art-color/
 
 To run this project you can use different ways as in the examples below:
 
-1. ```bash go run . Hello ``` gives the following output
+1. ``` go run . Hello ``` gives the following output
 
 ```code
  _    _          _   _          
@@ -40,11 +40,11 @@ To run this project you can use different ways as in the examples below:
                                 
 ```
 
-2. ```bash go run . --color=red Hell "Hello" ``` gives the following output
+2. ``` go run . --color=red Hell "Hello" ``` gives the following output
 
 ![image](banners/images/img1.png)
 
-3. ```bash go run . --color=red "Hello" shadow ``` this gives the following output.
+3. ``` go run . --color=red "Hello" shadow ``` this gives the following output.
 
 ![image](banners/images/img3.png)
 
@@ -53,7 +53,7 @@ To run this project you can use different ways as in the examples below:
 
 ## Test
 We have tests which tests possible cases and to run the test:
-- Navigate to the tests directory and run this:  ```bash go test -v ```
+- Navigate to the tests directory and run this:  ``` go test -v ```
 
 ## Implementation
 Below is a snippet of a function that validates the flag passed. It ensures that the format of the flag follows the format --color= else it gives the user the usage message.
