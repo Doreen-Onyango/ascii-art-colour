@@ -42,11 +42,11 @@ To run this project you can use different ways as in the examples below:
 
 2. ```bash go run . --color=red Hell "Hello" ``` gives the following output
 
-![images](banners/images/img1.png)
+![image](banners/images/img1.png)
 
 3. ```bash go run . --color=red "Hello" shadow ``` this gives the following output.
 
-![images](banners/images/img2.png)
+![image](banners/images/img3.png)
 
 
 **Note:** For each way above you can specify the banner file you desire from standard, shadow and thinkertoy.
