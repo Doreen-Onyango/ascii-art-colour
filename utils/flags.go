@@ -19,6 +19,14 @@ func ValidateFlagFormat() {
 
 	// Check if flags are in the correct format
 	flag.VisitAll(func(f *flag.Flag) {
+		// Check if flag is set
+		if flagIsSet(f.Name) {
+			if f.Name == "color" {
+				if *ColorPtr == "" {
+					valid = false
+				}
+			}
+		}
 		found := false
 		for _, arg := range os.Args[1:] {
 			if strings.HasPrefix(arg, "--"+f.Name+"=") {

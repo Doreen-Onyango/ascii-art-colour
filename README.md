@@ -1,4 +1,5 @@
-# Ascii-Art-Color
+![Ascii-Art-Color](/banners/images/ascii-art.png)
+
 This project enables you to colorize the output to give a distiction of the words or characters as specified. It allows you to specify the banner file which you want your output to take its representation. It also allows you to color some specified substring in your string.
 
 
