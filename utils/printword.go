@@ -4,38 +4,52 @@ import (
 	"strings"
 )
 
-// printWord prints a word using predefined lines from the content file
-func PrintWord(color string, word string, tobecolored string, contentLines []string) string {
-	// If the substring to be colored is empty, just print the word without coloring
-	if tobecolored == "" || color == "" {
-		linesOfSlice := make([]string, 8)
-		for _, v := range word {
-			for i := 1; i < 9; i++ {
-				linesOfSlice[i-1] += contentLines[int(v-32)*9+i]
-			}
-		}
-		return strings.Join(linesOfSlice, "\n")
-	}
-	// If the word contains the characters to be colored in the specified order e.g lo in Hello
+// prints a word using predefined lines from the content file.
+func PrintWord(color, word, tobecolored string, contentLines []string) string {
 	linesOfSlice := make([]string, 8)
+
+	if tobecolored == "" || color == "" {
+		return buildLines(word, contentLines, linesOfSlice, false)
+	}
+	return buildLines(word, contentLines, linesOfSlice, true, color, tobecolored)
+}
+
+// constructs lines for the word, optionally applying color.
+func buildLines(word string, contentLines []string, linesOfSlice []string, colored bool, args ...string) string {
 	start := 0
+	var color string
+	var tobecolored string
+
+	if colored {
+		color = args[0]
+		tobecolored = args[1]
+	}
 
 	for start < len(word) {
-		if strings.HasPrefix(word[start:], tobecolored) {
-			for i := 1; i < 9; i++ {
-				for _, v := range tobecolored {
-					linesOfSlice[i-1] += Color(contentLines[int(v-32)*9+i], color)
-				}
-			}
+		if colored && strings.HasPrefix(word[start:], tobecolored) {
+			appendColoredLines(tobecolored, color, contentLines, linesOfSlice)
 			start += len(tobecolored)
 		} else {
-			v := rune(word[start])
-			for i := 1; i < 9; i++ {
-				linesOfSlice[i-1] += contentLines[int(v-32)*9+i]
-			}
+			appendNormalLines(word[start], contentLines, linesOfSlice)
 			start++
 		}
 	}
 
 	return strings.Join(linesOfSlice, "\n")
+}
+
+// appends colored lines for the substring.
+func appendColoredLines(tobecolored, color string, contentLines []string, linesOfSlice []string) {
+	for i := 1; i < 9; i++ {
+		for _, char := range tobecolored {
+			linesOfSlice[i-1] += Color(contentLines[int(char-32)*9+i], color)
+		}
+	}
+}
+
+// appends normal lines for a character.
+func appendNormalLines(char byte, contentLines []string, linesOfSlice []string) {
+	for i := 1; i < 9; i++ {
+		linesOfSlice[i-1] += contentLines[int(char-32)*9+i]
+	}
 }
