@@ -6,23 +6,36 @@ import (
 	"strings"
 )
 
-// Create a file at the specified path and writes the provided content to it.
-// The function ensures the file has a .txt extension and
-// returns an error if any issues occur during file creation or writing.
-
+// CreateTextFile creates a text file at the specified path with the given content.
 func CreateTextFile(filePath string, content string) error {
+	if err := validateFilePath(filePath); err != nil {
+		return err
+	}
+
+	if err := writeToFile(filePath, content); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// validateFilePath checks if the file path has a .txt suffix.
+func validateFilePath(filePath string) error {
 	if !strings.HasSuffix(filePath, ".txt") {
 		return fmt.Errorf("invalid file extension: expected .txt")
 	}
+	return nil
+}
 
+// writeToFile creates a file and writes the content to it.
+func writeToFile(filePath string, content string) error {
 	file, err := os.Create(filePath)
 	if err != nil {
 		return fmt.Errorf("error creating file: %w", err)
 	}
 	defer file.Close()
 
-	_, err = file.WriteString(content)
-	if err != nil {
+	if _, err := file.WriteString(content); err != nil {
 		return fmt.Errorf("error writing content: %w", err)
 	}
 
