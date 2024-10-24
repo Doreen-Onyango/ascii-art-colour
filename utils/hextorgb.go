@@ -6,27 +6,42 @@ import (
 	"strings"
 )
 
+// converts a hex color string to an RGB array.
 func HexToRGB(hex string) ([3]int, error) {
 	var rgb [3]int
-
-	// Remove the leading '#' if it exists
-	hex = strings.TrimPrefix(hex, "#")
-
-	// Normalize the hex string
-	if len(hex) == 3 {
-		expanded := ""
-		for _, c := range hex {
-			expanded += string(c) + string(c)
-		}
-		hex = expanded
-	}
-
-	// Check if the length is valid
-	if len(hex) != 6 {
+	hex = normalizeHex(hex)
+	if !isValidHex(hex) {
 		return rgb, errors.New("invalid hex color")
 	}
+	return convertHexToRGB(hex)
+}
 
-	// Convert each pair of hex digits to an integer
+// removes the leading '#' and expands short hex codes.
+func normalizeHex(hex string) string {
+	hex = strings.TrimPrefix(hex, "#")
+	if len(hex) == 3 {
+		return expandShortHex(hex)
+	}
+	return hex
+}
+
+// expands a 3-character hex code to 6 characters.
+func expandShortHex(hex string) string {
+	var expanded strings.Builder
+	for _, c := range hex {
+		expanded.WriteString(string(c) + string(c))
+	}
+	return expanded.String()
+}
+
+// checks if the hex string is valid (must be 6 characters).
+func isValidHex(hex string) bool {
+	return len(hex) == 6
+}
+
+// converts a valid 6-character hex string to an RGB array.
+func convertHexToRGB(hex string) ([3]int, error) {
+	var rgb [3]int
 	for i := 0; i < 3; i++ {
 		val, err := strconv.ParseInt(hex[i*2:i*2+2], 16, 64)
 		if err != nil {
@@ -34,6 +49,5 @@ func HexToRGB(hex string) ([3]int, error) {
 		}
 		rgb[i] = int(val)
 	}
-
 	return rgb, nil
 }
